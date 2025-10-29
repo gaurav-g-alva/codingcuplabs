@@ -27,14 +27,32 @@ function useGitHubPagesRouter() {
       console.log('Running on GitHub Pages with base path:', basePath);
       // Log current location for debugging
       console.log('Current location:', location);
+      
+      // Handle navigation for GitHub Pages
+      const handleClick = (e) => {
+        const target = e.target.closest('a');
+        if (!target) return;
+        
+        const href = target.getAttribute('href');
+        if (!href || href.startsWith('http') || href.startsWith('#')) return;
+        
+        // Prevent default navigation
+        e.preventDefault();
+        
+        // Use wouter's setLocation for navigation
+        setLocation(href.startsWith('/') ? href : `/${href}`);
+      };
+      
+      document.body.addEventListener('click', handleClick);
+      return () => document.body.removeEventListener('click', handleClick);
     }
-  }, [isGitHubPages, basePath, location]);
+  }, [isGitHubPages, basePath, location, setLocation]);
 
-  return { basePath, isGitHubPages };
+  return { basePath, isGitHubPages, setLocation };
 }
 
 function Router() {
-  const { basePath, isGitHubPages } = useGitHubPagesRouter();
+  const { basePath, isGitHubPages, setLocation } = useGitHubPagesRouter();
   
   return (
     <Switch>
