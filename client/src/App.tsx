@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -13,20 +13,41 @@ import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import { useEffect } from "react";
+
+// Custom hook to handle GitHub Pages base path
+function useGitHubPagesRouter() {
+  const [location, setLocation] = useLocation();
+  const isGitHubPages = typeof window !== 'undefined' && 
+    window.location.hostname.includes('github.io');
+  const basePath = isGitHubPages ? '/codingcuplabs' : '';
+  
+  useEffect(() => {
+    if (isGitHubPages) {
+      console.log('Running on GitHub Pages with base path:', basePath);
+      // Log current location for debugging
+      console.log('Current location:', location);
+    }
+  }, [isGitHubPages, basePath, location]);
+
+  return { basePath, isGitHubPages };
+}
 
 function Router() {
+  const { basePath, isGitHubPages } = useGitHubPagesRouter();
+  
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/about"} component={About} />
-      <Route path={"/services"} component={Services} />
-      <Route path={"/careers"} component={Careers} />
-      <Route path={"/careers/:slug"} component={JobDetail} />
-      <Route path={"/blogs"} component={Blogs} />
-      <Route path={"/blogs/:slug"} component={BlogDetail} />
-      <Route path={"/contact"} component={Contact} />
-      <Route path={"/privacy-policy"} component={PrivacyPolicy} />
-      <Route path={"/404"} component={NotFound} />
+      <Route path={`${basePath}/`} component={Home} />
+      <Route path={`${basePath}/about`} component={About} />
+      <Route path={`${basePath}/services`} component={Services} />
+      <Route path={`${basePath}/careers`} component={Careers} />
+      <Route path={`${basePath}/careers/:slug`} component={JobDetail} />
+      <Route path={`${basePath}/blogs`} component={Blogs} />
+      <Route path={`${basePath}/blogs/:slug`} component={BlogDetail} />
+      <Route path={`${basePath}/contact`} component={Contact} />
+      <Route path={`${basePath}/privacy-policy`} component={PrivacyPolicy} />
+      <Route path={`${basePath}/404`} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>

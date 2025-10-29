@@ -11,7 +11,7 @@ const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(
 
 export default defineConfig({
   plugins,
-  base: "/codingcup-labs-website/", // Base path for GitHub Pages
+  base: "/codingcuplabs/", // Base path for GitHub Pages
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

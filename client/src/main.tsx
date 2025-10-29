@@ -40,9 +40,20 @@ queryClient.getMutationCache().subscribe(event => {
 const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
-      url: "/api/trpc",
+      url: process.env.NODE_ENV === 'production' && window.location.hostname.includes('github.io') 
+        ? 'https://example.com/api/trpc' // Replace with your actual API endpoint if you have one
+        : '/api/trpc',
       transformer: superjson,
       fetch(input, init) {
+        // For GitHub Pages deployment, we'll mock API responses
+        if (process.env.NODE_ENV === 'production' && window.location.hostname.includes('github.io')) {
+          console.log('Running in GitHub Pages mode - API calls will be mocked');
+          // Return mock data instead of making actual API calls
+          return Promise.resolve(new Response(JSON.stringify({ result: { data: null } }), {
+            headers: { 'Content-Type': 'application/json' },
+          }));
+        }
+        
         return globalThis.fetch(input, {
           ...(init ?? {}),
           credentials: "include",
