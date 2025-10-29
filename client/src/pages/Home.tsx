@@ -9,18 +9,18 @@ export default function Home() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div className="container max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80">
+          <Link href="codingcuplabs/" className="flex items-center gap-2 hover:opacity-80">
             <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <Code2 className="w-5 h-5 text-white" />
             </div>
             <span className="font-bold text-xl text-gray-900">CodingCup Labs</span>
           </Link>
           <div className="hidden md:flex gap-8">
-            <Link href="/about" className="text-gray-700 hover:text-blue-600 transition">About</Link>
-            <Link href="/services" className="text-gray-700 hover:text-blue-600 transition">Services</Link>
-            <Link href="/careers" className="text-gray-700 hover:text-blue-600 transition">Careers</Link>
-            <Link href="/blogs" className="text-gray-700 hover:text-blue-600 transition">Blogs</Link>
-            <Link href="/contact" className="text-gray-700 hover:text-blue-600 transition">Contact</Link>
+            <Link href="codingcuplabs/about" className="text-gray-700 hover:text-blue-600 transition">About</Link>
+            <Link href="codingcuplabs/services" className="text-gray-700 hover:text-blue-600 transition">Services</Link>
+            <Link href="codingcuplabs/careers" className="text-gray-700 hover:text-blue-600 transition">Careers</Link>
+            <Link href="codingcuplabs/blogs" className="text-gray-700 hover:text-blue-600 transition">Blogs</Link>
+            <Link href="codingcuplabs/contact" className="text-gray-700 hover:text-blue-600 transition">Contact</Link>
           </div>
         </div>
       </nav>
@@ -37,12 +37,12 @@ export default function Home() {
                 CodingCup Labs provides cutting-edge SaaS solutions designed to accelerate your development workflow and maximize productivity.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/services">
+                <Link href="codingcuplabs/services">
                   <Button size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700">
                     Explore Services <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>
-                <Link href="/contact">
+                <Link href="codingcuplabs/contact">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">
                     Get in Touch
                   </Button>
